@@ -8,7 +8,6 @@ export const LoginContainer = styled.div`
   text-align: center;
   align-items: center;
 
-  height: 100vh;
-
-  background-color: ${({ theme }) => theme.palette.background.default};
+  width: 100%;
+  color: ${({ theme }) => theme.palette.primary.contrastText};
 `;
