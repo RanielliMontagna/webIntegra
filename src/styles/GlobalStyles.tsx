@@ -10,6 +10,10 @@ const GlobalStyles = () => {
 
           font-family: 'Inter', sans-serif;
         }
+
+        *::-ms-reveal {
+          display: none;
+        }
       `}
     />
   );
