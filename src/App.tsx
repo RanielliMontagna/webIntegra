@@ -3,6 +3,9 @@ import { SnackbarProvider } from 'notistack';
 import Router from './routes/router';
 import { GlobalStyles } from './styles/GlobalStyles';
 
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 function App() {
   const theme = createTheme({
     palette: {
@@ -55,8 +58,10 @@ function App() {
           }}
           autoHideDuration={2000}
         >
-          <GlobalStyles />
-          <Router />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <GlobalStyles />
+            <Router />
+          </LocalizationProvider>
         </SnackbarProvider>
       </ThemeProvider>
     </StyledEngineProvider>

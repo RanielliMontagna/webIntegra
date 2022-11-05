@@ -1,5 +1,7 @@
 import { AxiosError } from 'axios';
 import create from 'zustand';
+import { removeLocalToken, setLocalToken } from '../../helpers/localStorage';
+import { useAuth } from '../auth/auth';
 import type { AppStore, Notification } from './app.types';
 
 const useApp = create<AppStore>((set) => ({
@@ -24,10 +26,15 @@ const useApp = create<AppStore>((set) => ({
 
     if (error instanceof AxiosError) {
       if (error.response?.data?.error) {
-        set((state) => ({
-          ...state,
-          notification: notificationObject(error.response?.data.error),
-        }));
+        if (error.response?.data?.error === 'Token inválido!') {
+          useAuth.getState().clearStore();
+          removeLocalToken();
+        } else {
+          set((state) => ({
+            ...state,
+            notification: notificationObject(error.response?.data.error),
+          }));
+        }
       } else {
         set((state) => ({
           ...state,
